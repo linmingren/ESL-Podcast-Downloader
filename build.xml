@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SNMP_Simulator" default="buildjar" basedir=".">
+
+	<property name="jar.name"   value="ESLPodcastDownloader.jar"/>
+	
+	<path id="library">
+		<fileset dir="${basedir}/lib" includes="**/*.jar" />
+	</path>
+
+	<target name="clean" description="">
+		<delete dir="${basedir}/bin/" />
+		<delete file="${basedir}/${jar.name}"/>
+		<mkdir  dir="${basedir}/bin/" />
+	</target>
+
+	<target name="compile" depends="clean" description="">
+		<javac classpathref="library" 
+			debug="true" 
+			debuglevel="source,lines,vars" 
+			nowarn="true" 
+			source="1.5"
+			srcdir="${basedir}/src" 
+			destdir="${basedir}/bin"/>
+	</target>
+
+	<target name="buildjar" depends="compile" description="Make runnable jar">
+		<jar destfile="${basedir}/${jar.name}">
+			<manifest>
+				<attribute name="Built-By" value="linmingren"/>
+				<attribute name="Specification-Vendor" value="linmingren"/>
+				<attribute name="Main-Class" value="me.linmingren.EslPodCastCrawlerClient"/>
+				<attribute name="Class-Path" value="."/>
+			</manifest>
+
+			<zipfileset src="${basedir}/lib/apache-mime4j-core-0.7.jar"/>
+			<zipfileset src="${basedir}/lib/apache-mime4j-dom-0.7.jar"/>
+			<zipfileset src="${basedir}/lib/asm-3.1.jar"/>
+			<zipfileset src="${basedir}/lib/boilerpipe-1.1.0.jar"/>
+			<zipfileset src="${basedir}/lib/commons-codec-1.6.jar"/>
+			<zipfileset src="${basedir}/lib/commons-compress-1.3.jar"/>
+			<zipfileset src="${basedir}/lib/commons-logging-1.1.1.jar"/>
+			<zipfileset src="${basedir}/lib/core-renderer.jar"/>
+			<zipfileset src="${basedir}/lib/crawler4j-3.5.jar"/>
+			<zipfileset src="${basedir}/lib/geronimo-stax-api_1.0_spec-1.0.1.jar"/>
+			<zipfileset src="${basedir}/lib/httpclient-4.2.3.jar"/>
+			<zipfileset src="${basedir}/lib/httpcore-4.2.2.jar"/>
+			<zipfileset src="${basedir}/lib/iText-2.0.8.jar" excludes="META-INF/*.SF"/>
+			<zipfileset src="${basedir}/lib/itextpdf-5.4.2.jar"/>
+			<zipfileset src="${basedir}/lib/je-4.0.92.jar"/>
+			<zipfileset src="${basedir}/lib/jsoup-1.7.2.jar"/>
+			<zipfileset src="${basedir}/lib/jtidy-r938.jar"/>
+			<zipfileset src="${basedir}/lib/log4j-1.2.14.jar"/>
+			<zipfileset src="${basedir}/lib/metadata-extractor-2.4.0-beta-1.jar"/>		
+			<zipfileset src="${basedir}/lib/tagsoup-1.2.1.jar"/>
+			<zipfileset src="${basedir}/lib/tika-core-1.0.jar"/>
+			<zipfileset src="${basedir}/lib/tika-parsers-1.0.jar"/>
+			<zipfileset src="${basedir}/lib/xml-apis-xerces-2.9.1.jar"/>
+			<fileset dir="${basedir}/bin" />
+		</jar>
+	</target>
+</project>
